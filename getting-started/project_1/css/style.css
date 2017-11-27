@@ -1,0 +1,16 @@
+[v-cloak] {
+  display: none;
+}
+
+.accent-color {
+  color: #FF6A00;
+}
+
+.headers {
+  font-family: 'Verdana';
+  margin: 0;
+}
+
+input {
+  margin-bottom: 10px;
+}

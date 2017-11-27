@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div id="growler">
+    <label>Query Results</label>
+    <ul>
+      <li v-cloak v-for="item in page">item {{ item }}</li>
+    </ul>
+    <ul>
+      <li v-cloak v-for="page in totalPages">
+        <a v-if="currentPage === page">link {{ page }}</a>
+        <a v-else href="#">link {{ page }}</a>
+      </li>
+    </ul>
+  </div>
+
+  <script type="text/javascript" src="https://unpkg.com/vue"></script>
+
+  <script type="text/javascript" src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+  <script type="text/javascript">
+    var growler = new Vue({
+      el: '#growler',
+      data: {
+        currentPage: 1,
+        itemsPerPage: 5,
+        totalItems: 25,
+        totalPages: null,
+        items: [],
+        page: [],
+        temp: true
+      },
+      methods: {
+        // renderPage
+      },
+      beforeMount () {
+        for(let i = 0; i < this.totalItems; i++) {
+          let currentItem = i;
+          this.items.push(i + 1);
+        }
+
+        let startingItem = null;
+        if (this.currentPage === 1) {
+            startingItem = 0;
+          } else {
+            startingItem = (this.currentPage - 1) * 5;
+          }
+
+        for(let i = startingItem; i < startingItem + this.itemsPerPage; i++) {
+          this.page.push(this.items[i]);
+        }
+        this.totalPages = this.totalItems / this.itemsPerPage
+      }
+    });
+  </script>
+
+</body>
+</html>
